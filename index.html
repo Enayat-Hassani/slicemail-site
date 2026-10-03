@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Slicemail for Google Sheets™</title><link rel="icon" href="assets/icon-96.png">
+<title>Slicemail for Google Sheets™</title><link rel="icon" href="assets/icon-32.png" sizes="32x32"><link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
 <style>
-:root{--bg:#fff;--text:#14171a;--muted:#5b626b;--line:#e3e6ea;--accent:#4a5bf0;--code:#f3f5f7}
+:root{--bg:#fff;--text:#14171a;--muted:#5b626b;--line:#e3e6ea;--accent:#3a46b0;--code:#f3f5f7}
 @media (prefers-color-scheme:dark){:root{--bg:#14171a;--text:#e8eaed;--muted:#9aa1a9;--line:#2c3238;--accent:#8f9bff;--code:#1f2429}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-header,main,footer{max-width:720px;margin:0 auto;padding:0 20px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Schibsted Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+header,main,footer{max-width:1120px;margin:0 auto;padding:0 20px}
 header{display:flex;align-items:center;gap:12px;padding-top:24px;padding-bottom:12px}
 header img{width:36px;height:36px;border-radius:9px}header a{color:var(--text);text-decoration:none;font-weight:600}
 nav{margin-left:auto;display:flex;gap:16px;font-size:14px}nav a{color:var(--muted);font-weight:400}
@@ -14,225 +15,61 @@ a{color:var(--accent)}p,li{max-width:70ch}code{background:var(--code);padding:.1
 pre{background:var(--code);padding:12px 14px;border-radius:8px;overflow:auto}pre code{background:none;padding:0}
 table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.94rem}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 blockquote{margin:1em 0;padding:.2em 1em;border-left:3px solid var(--line);color:var(--muted)}
+@media (max-width:480px){nav{gap:10px;font-size:13px}header{gap:8px}}
 footer{padding-top:32px;padding-bottom:40px;color:var(--muted);font-size:14px}
 .lede{font-size:1.15rem;color:var(--muted)}.demo{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:24px 0}.demo iframe{display:block;width:100%;height:720px;border:0}
 .shots{display:grid;gap:16px;margin:24px 0}.shots img{max-width:100%;border:1px solid var(--line);border-radius:10px}
+
+.hero{padding:56px 0 8px;display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+.hero h1{margin:0;max-width:16ch;font-size:clamp(2.4rem,5.4vw,4.1rem);line-height:1.02;letter-spacing:-.035em;font-weight:700}
+.hero p{margin:0;max-width:52ch;font-size:1.2rem;line-height:1.55;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+.btn{display:inline-block;padding:13px 22px;border-radius:10px;background:var(--text);color:var(--bg);font-weight:600;text-decoration:none}
+.btn:hover{opacity:.9}.soft{color:var(--muted);font-size:.95rem}
+.film{margin:12px 0 0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(58,70,176,.45)}
+.film video{display:block;width:100%;height:auto;background:#f9fbfd}
+.band{margin:96px 0 0}
+.band h2{margin:0 0 10px;font-size:clamp(1.7rem,3vw,2.3rem);line-height:1.12;letter-spacing:-.02em;font-weight:700;max-width:22ch}
+.band>p{margin:0 0 28px;font-size:1.08rem;color:var(--muted);max-width:60ch}
+.split{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.mail{border:1px solid var(--line);border-radius:14px;background:#fff;color:#14171a;overflow:hidden}
+.mail-head{padding:14px 16px 12px;border-bottom:1px solid #e3e6ea}
+.mail-to{font-size:.82rem;color:#5b626b}.mail-subject{margin-top:2px;font-weight:600;font-size:.98rem}
+.mail-body{height:300px;overflow:hidden;position:relative}
+.mail-body>div{width:600px;padding:14px 16px;transform:scale(.56);transform-origin:0 0;font:13px/1.5 Arial,sans-serif}
+.mail-body::after{content:"";position:absolute;left:0;right:0;bottom:0;height:56px;background:linear-gradient(transparent,#fff)}
+.checks{border:1px solid var(--line);border-radius:14px;padding:6px 22px;max-width:760px}
+.checks li{margin:14px 0;padding-left:4px}.checks ul{padding-left:18px}.checks li::marker{color:#c98a1b}
+.examples{list-style:none;padding:0;margin:0;border-top:1px solid var(--line);max-width:860px}
+.examples li{display:grid;grid-template-columns:220px minmax(0,1fr);gap:24px;padding:18px 0;border-bottom:1px solid var(--line);max-width:none}
+.examples b{font-weight:600}.examples span{color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 48px;max-width:860px}
+.facts p{margin:0}.facts b{display:block;font-weight:600}
+.end{margin:96px 0 24px;padding:44px 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
+.end h2{margin:0;font-size:1.6rem;letter-spacing:-.02em}
+@media (max-width:860px){.split{grid-template-columns:minmax(0,1fr)}.examples li,.facts{grid-template-columns:minmax(0,1fr);gap:4px}}
+@media (prefers-reduced-motion:reduce){.film video{display:none}.film{background:url(assets/demo-poster.png) center/cover;aspect-ratio:16/10}}
 </style></head><body>
 <header><img src="assets/icon-96.png" alt=""><a href="index.html">Slicemail</a>
 <nav><a href="demo.html">Demo</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></header>
-<main><h1>Send one report as many emails, each recipient seeing only their own rows, straight from
-your Google Sheet.</h1><p class="lede">One report in a Google Doc. A separate email for each site, team or client, each with only its own rows. You see every email before anything is sent.</p><div id="hero" role="img" aria-label="Animation: on a laptop, rows from one spreadsheet are split into a separate email for each site; a site with sales and no recipient is flagged before anything is sent; the email arrives with the sheet's colours">
-  <div id="h-stage">
-    <div id="h-cam">
-      <div id="h-desk"></div>
-      <div id="h-laptop">
-        <div id="h-screen">
-          <div class="s-top"><i class="s-doc"></i><b>Weekly sales</b><span>File</span><span>Edit</span><span>View</span><span>Insert</span><span>Format</span><span>Data</span><span>Tools</span><span id="s-ext">Extensions</span><span>Help</span></div>
-          <div class="s-tool"><i></i><i></i><i></i><u></u><i></i><i></i><i></i><i></i></div>
-          <div class="s-fx"><em>fx</em><span>Date</span></div>
-          <div id="s-grid"></div>
-          <div class="s-tabs"><span>Sheet1</span><span class="on">Demo Sales</span><span>Slicemail Log</span></div>
-          <div id="s-side">
-            <div class="sb-head">Slicemail</div>
-            <div id="sb-home"><div class="sb-card"><p>Weekly site sales</p><small>Sent today 09:16</small></div><div class="sb-card"><p>Per site, from the data</p></div><div id="sb-new" class="sb-btn">New report</div></div>
-            <div id="sb-prev" hidden>
-              <div class="sb-stats"><span><b>3</b>emails</span><span><b>3</b>people</span><span><b>18</b>rows</span></div>
-              <div id="sb-check"><i></i>1 thing to check<p hidden>Rows with Site = Lakeside go to no one: nobody picked by [TO] has that site.</p></div>
-              <div id="sb-cards"></div>
-              <div class="sb-btn dark">Send test to me</div>
-            </div>
-          </div>
-          <div id="s-editor" hidden>
-            <div class="ed-bar"><b>New report</b><span>Save to Doc</span></div>
-            <div class="ed-body">
-              <div class="ed-left"><small>To</small><p>Manager Email is not blank AND Date in Last 7 days</p><small>Subject</small><p><b>Weekly report -</b> <i>Site</i> <i>Yesterday</i></p><small>Body</small><p>Good morning, here are the rows for <i>Site</i>.</p><div class="ed-tbl">Table &middot; Demo Sales &middot; Last 7 days</div></div>
-              <div class="ed-right"><small>Preview</small><div class="ed-mail"><i></i><i></i><i></i><i></i></div></div>
-            </div>
-          </div>
-          <div id="s-mail" hidden>
-            <div class="m-head"><b>Riverside sales - 02-Oct-2026</b><small>to avery.stone@example.com</small></div>
-            <div class="m-body"><p>Good morning, here are the rows for Riverside.</p><table><tr><th>Date</th><th>Site</th><th>Orders</th><th>Conversion</th></tr><tr><td>29-Sep</td><td>Riverside</td><td>42</td><td class="g">14.0%</td></tr><tr class="b"><td>30-Sep</td><td>Riverside</td><td>49</td><td class="r">8.0%</td></tr><tr><td>01-Oct</td><td>Riverside</td><td>56</td><td>11.0%</td></tr></table></div>
-          </div>
-          <div id="h-cursor"><svg viewBox="0 0 16 20" width="16" height="20"><path d="M1 1l12 9-5.5 1 3.5 7-2.5 1-3.5-7L1 16z" fill="#14171a" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
-        </div>
-      </div>
-      <div id="h-base"></div>
-    </div>
-    <div id="h-cap"></div>
-  </div>
-</div>
-<style>
-#hero{margin:28px 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#dfe3e8;position:relative}
-#hero *{box-sizing:border-box}
-#hero [hidden]{display:none!important}
-#h-stage{position:relative;width:960px;height:540px;transform-origin:0 0;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#14171a}
-#h-cam{position:absolute;left:0;top:0;width:960px;height:540px;transform-origin:0 0;will-change:transform}
-#h-desk{position:absolute;left:-600px;top:-600px;width:2160px;height:1740px;background:linear-gradient(#eef0f3 0,#e3e6ea 53%,#cfd4da 53.7%,#c4c9d0 100%)}
-#h-laptop{position:absolute;left:144px;top:54px;width:672px;height:392px;border-radius:14px;background:#14171a;padding:0;box-shadow:0 0 0 10px #14171a,0 18px 36px rgba(20,23,26,.28)}
-#h-base{position:absolute;left:76px;top:462px;width:808px;height:18px;border-radius:0 0 22px 22px;background:linear-gradient(#d9dde2,#b8bec6);box-shadow:0 14px 22px rgba(20,23,26,.2)}
-#h-screen{position:absolute;inset:0;overflow:hidden;border-radius:6px;background:#fff;font-size:9px}
-.s-top{position:relative;height:26px;display:flex;align-items:center;gap:8px;padding:0 8px;background:#f6f8fc;border-bottom:1px solid #e1e5ea;white-space:nowrap}
-.s-top b{font-size:11px;font-weight:500;margin-right:6px}.s-top span{color:#444746}.s-doc{width:11px;height:14px;border-radius:2px;background:#9aa4b2;display:inline-block}
-.s-tool{height:20px;display:flex;gap:7px;align-items:center;padding:0 8px;background:#edf2fa;border-bottom:1px solid #e1e5ea}
-.s-tool i{width:11px;height:9px;border-radius:2px;background:#c7cdd6}.s-tool u{width:1px;height:12px;background:#b8bec6}
-.s-fx{height:16px;display:flex;align-items:center;gap:8px;padding:0 8px;border-bottom:1px solid #e1e5ea;color:#5b626b}.s-fx em{font-style:italic;font-family:Georgia,serif}
-#s-grid{position:absolute;left:0;top:62px;width:672px;height:286px;overflow:hidden;background:#fff;transition:width .6s cubic-bezier(.2,.8,.2,1)}
-#s-grid.narrow{width:476px}
-.g-row{display:flex;height:17px;border-bottom:1px solid #e3e6ea;position:relative;transition:background-color .5s}
-.g-row.head{height:16px;background:#f8f9fa;color:#5b626b;text-align:center}
-.g-cell{flex:none;padding:0 5px;line-height:16px;border-right:1px solid #e3e6ea;white-space:nowrap;overflow:hidden}
-.g-n{width:20px;background:#f8f9fa;color:#5b626b;text-align:center;padding:0}
-.g-row.hdr .g-cell:not(.g-n){background:#4a5bf0;color:#fff;font-weight:700}
-.g-row.band .g-cell:not(.g-n){background:#f4f6ff}
-.g-cell.good{color:#0b7a4b;font-weight:700}.g-cell.bad{color:#b42318;font-weight:700}.g-cell.num{text-align:right}
-.g-row[data-s=Riverside].tint .g-cell:not(.g-n){background:rgba(47,125,107,.22)}.g-row[data-s=Harbor].tint .g-cell:not(.g-n){background:rgba(194,65,93,.2)}
-.g-row[data-s=Hilltop].tint .g-cell:not(.g-n){background:rgba(106,90,205,.2)}.g-row[data-s=Lakeside].tint .g-cell:not(.g-n){background:rgba(217,142,4,.3)}
-.g-row.pulse .g-cell:not(.g-n){animation:h-pulse 1s ease-in-out 3}
-@keyframes h-pulse{50%{background:rgba(217,142,4,.62)}}
-.s-tabs{position:absolute;left:0;right:0;bottom:0;height:22px;display:flex;gap:2px;align-items:center;padding:0 8px;background:#f6f8fc;border-top:1px solid #e1e5ea}
-.s-tabs span{padding:3px 9px;border-radius:5px;color:#444746}.s-tabs .on{background:#e1e9f8;color:#0b3d91;font-weight:600}
-#s-side{position:absolute;right:0;top:26px;bottom:22px;width:196px;background:#eff1f3;border-left:1px solid #d6dae0;transform:translateX(200px);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-#s-side.open{transform:none}
-.sb-head{height:36px;background:#14171a;color:#fff;font-weight:600;font-size:11px;display:flex;align-items:center;padding:0 10px}
-#sb-home,#sb-prev{padding:8px;display:grid;gap:6px}
-.sb-card{background:#fff;border:1px solid #e3e6ea;border-radius:7px;padding:6px 8px}.sb-card p{margin:0;font-weight:600}.sb-card small{color:#5b626b}
-.sb-btn{background:#fff;border:1px solid #cdd1d8;border-radius:7px;padding:7px;text-align:center;font-weight:600;transition:transform .15s,background-color .15s}
-.sb-btn.dark{background:#14171a;color:#fff;border-color:#14171a}.sb-btn.press{transform:scale(.94);background:#e8eaee}
-.sb-stats{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border:1px solid #e3e6ea;border-radius:7px;padding:6px 8px}
-.sb-stats span{display:grid;color:#5b626b;font-size:8px;text-transform:uppercase;letter-spacing:.04em}.sb-stats b{font-size:15px;color:#14171a;text-transform:none;letter-spacing:0}
-#sb-check{background:#fff;border:1px solid #e3e6ea;border-radius:7px;padding:6px 8px;color:#7a5200;font-weight:600;transition:background-color .4s,border-color .4s}
-#sb-check i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#d98e04;margin-right:6px}
-#sb-check p{margin:5px 0 0;font-weight:400;color:#14171a;line-height:1.35}#sb-check.hot{background:#fdf0d4;border-color:#e6b24f}
-#sb-cards{display:grid;gap:5px}
-.sb-em{background:#fff;border:1px solid #e3e6ea;border-radius:7px;padding:5px 8px;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s,box-shadow .3s}
-.sb-em.show{opacity:1;transform:none}.sb-em.glow{box-shadow:0 0 0 2px var(--c)}
-.sb-em b{display:flex;align-items:center;gap:6px}.sb-em i{width:7px;height:7px;border-radius:50%;background:var(--c)}.sb-em small{color:#5b626b}
-#s-editor{position:absolute;left:46px;right:46px;top:44px;bottom:44px;background:#fff;border:1px solid #cdd1d8;border-radius:10px;box-shadow:0 12px 30px rgba(20,23,26,.3);overflow:hidden;z-index:4;animation:h-in .35s both}
-.ed-bar{height:26px;background:#14171a;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:10px}.ed-bar span{background:#fff;color:#14171a;border-radius:5px;padding:2px 7px;font-weight:600}
-.ed-body{display:grid;grid-template-columns:1.1fr 1fr;height:calc(100% - 26px)}
-.ed-left{padding:9px 11px;border-right:1px solid #e3e6ea}.ed-left small,.ed-right small{display:block;color:#5b626b;margin-top:7px;font-size:8px;text-transform:uppercase;letter-spacing:.05em}
-.ed-left p{margin:2px 0 0}.ed-left i{background:#eceef2;border-radius:4px;padding:0 4px;font-style:normal;color:#4b5258}
-.ed-tbl{margin-top:9px;background:#eff1f3;border:1px solid #e3e6ea;border-radius:6px;padding:7px 9px;color:#5b626b}
-.ed-right{padding:9px 11px;background:#eff1f3}.ed-mail{margin-top:6px;background:#fff;border-radius:7px;padding:8px;display:grid;gap:4px}.ed-mail i{height:9px;border-radius:2px;background:#e3e6ea}.ed-mail i:first-child{background:#4a5bf0}
-#s-mail{position:absolute;left:96px;top:56px;width:340px;background:#fff;border:1px solid #cdd1d8;border-radius:10px;box-shadow:0 14px 34px rgba(20,23,26,.34);z-index:5;animation:h-in .4s both;overflow:hidden}
-.m-head{padding:8px 12px;border-bottom:1px solid #e3e6ea}.m-head b{display:block;font-size:11px}.m-head small{color:#5b626b}.m-body{padding:9px 12px}.m-body p{margin:0 0 7px}
-.m-body table{border-collapse:collapse;width:100%;font-size:9.5px}.m-body th{background:#4a5bf0;color:#fff;text-align:left;padding:4px 7px}.m-body td{padding:4px 7px;border-bottom:1px solid #e3e6ea}
-.m-body tr.b td{background:#f4f6ff}.m-body .g{color:#0b7a4b;font-weight:700}.m-body .r{color:#b42318;font-weight:700}
-@keyframes h-in{from{opacity:0;transform:translateY(8px) scale(.98)}}
-#h-cursor{position:absolute;left:0;top:0;z-index:9;pointer-events:none;opacity:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
-#h-cap{position:absolute;left:0;right:0;bottom:18px;text-align:center;font-size:21px;font-weight:600;color:#14171a;opacity:0;transition:opacity .5s;padding:0 40px;pointer-events:none}
-#h-cap.on{opacity:1}#h-cap .c{display:inline-block;background:rgba(255,255,255,.92);border-radius:12px;padding:8px 20px 9px;box-shadow:0 4px 18px rgba(20,23,26,.16)}#h-cap small{display:block;font-size:14px;font-weight:500;color:#4b5258;margin-top:2px}
-.h-fly{position:absolute;height:14px;border-radius:3px;z-index:6;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.25)}
-@media (prefers-reduced-motion:reduce){#s-side,#s-grid,.sb-em,#h-cap{transition:none}#s-editor,#s-mail{animation:none}.g-row.pulse .g-cell{animation:none}}
-</style>
-<script>
-(function () {
-  var hero = document.getElementById("hero"), stage = document.getElementById("h-stage"), cam = document.getElementById("h-cam"), screen = document.getElementById("h-screen");
-  var grid = document.getElementById("s-grid"), side = document.getElementById("s-side"), cap = document.getElementById("h-cap"), cursor = document.getElementById("h-cursor");
-  var $ = function (id) { return document.getElementById(id); };
-  var SITES = { Riverside: ["#2f7d6b", "avery.stone@"], Harbor: ["#c2415d", "blake.harper@"], Hilltop: ["#6a5acd", "finley.brooks@"] };
-  var DATA = [["26-Sep","Riverside","Team A",46,920,"14.0%","g"],["26-Sep","Harbor","Team B",62,1550,"16.0%","g"],["26-Sep","Hilltop","Team C",60,1800,"12.0%",""],["27-Sep","Riverside","Team A",53,1060,"8.0%","b"],
-    ["27-Sep","Harbor","Team B",69,1725,"10.0%",""],["27-Sep","Lakeside","Team D",38,760,"9.0%","b"],["27-Sep","Hilltop","Team C",67,2010,"15.0%","g"],["28-Sep","Riverside","Team A",60,1200,"11.0%",""],
-    ["28-Sep","Harbor","Team B",51,1275,"13.0%","g"],["29-Sep","Lakeside","Team D",41,820,"11.0%",""],["29-Sep","Hilltop","Team C",74,2220,"9.0%","b"],["30-Sep","Riverside","Team A",49,980,"8.0%","b"]];
-  var W = [20, 62, 62, 52, 50, 56, 52, 120], timers = [], reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, running = false;
-  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
-  function cells(row, vals, cls) { vals.forEach(function (v, i) { var c = el("div", "g-cell" + (i === 0 ? " g-n" : "") + (cls && cls[i] ? " " + cls[i] : ""), v); c.style.width = W[i] + "px"; row.appendChild(c); }); }
-  function build() {
-    grid.innerHTML = ""; grid.classList.remove("narrow");
-    var h = el("div", "g-row head"); cells(h, ["", "A", "B", "C", "D", "E", "F", "G"]); grid.appendChild(h);
-    var hd = el("div", "g-row hdr"); cells(hd, ["1", "Date", "Site", "Team", "Orders", "Revenue", "Conversion", "Manager Email"]); grid.appendChild(hd);
-    DATA.forEach(function (r, i) {
-      var row = el("div", "g-row" + (i % 2 ? " band" : "")); row.dataset.s = r[1];
-      var mgr = SITES[r[1]] ? SITES[r[1]][1] + "example.com" : "";
-      cells(row, [String(i + 2), r[0], r[1], r[2], String(r[3]), String(r[4]), r[5], mgr], ["", "", "", "", "num", "num", r[6] === "g" ? "good num" : r[6] === "b" ? "bad num" : "num", ""]);
-      grid.appendChild(row);
-    });
-    var cards = $("sb-cards"); cards.innerHTML = "";
-    Object.keys(SITES).forEach(function (s) {
-      var c = el("div", "sb-em"); c.style.setProperty("--c", SITES[s][0]); c.dataset.s = s;
-      c.innerHTML = "<b><i></i>" + s + "</b><small>1 To &middot; 6 rows</small>"; cards.appendChild(c);
-    });
-    side.classList.remove("open"); $("sb-home").hidden = false; $("sb-prev").hidden = true; $("s-editor").hidden = true; $("s-mail").hidden = true;
-    $("sb-check").classList.remove("hot"); $("sb-check").querySelector("p").hidden = true; cursor.style.opacity = 0;
-    stage.querySelectorAll(".h-fly").forEach(function (n) { n.remove(); });
-    caption(""); setCam(0.8, 480, 270, 0);
-  }
-  function fit() { var k = hero.clientWidth / 960; stage.style.transform = "scale(" + k + ")"; hero.style.height = 540 * k + "px"; }
-  function pos(node) { var x = 0, y = 0; while (node && node !== screen) { x += node.offsetLeft; y += node.offsetTop; node = node.offsetParent; } return [x, y]; }
-  // The camera: a scale and the point of the stage that lands at the stage's centre.
-  var SX = 144, SY = 54;
-  function setCam(k, cx, cy, ms) {
-    var ox = 480 - cx * k, oy = 270 - cy * k, t = "translate(" + ox + "px," + oy + "px) scale(" + k + ")";
-    if (!ms || reduce) { cam.style.transform = t; return; }
-    var from = getComputedStyle(cam).transform;
-    cam.animate([{ transform: from === "none" ? "none" : from }, { transform: t }], { duration: ms, easing: "cubic-bezier(.45,0,.2,1)", fill: "forwards" }).finished.then(function () { cam.style.transform = t; });
-  }
-  function caption(text, sub) { cap.classList.remove("on"); if (!text) return; later(150, function () { cap.innerHTML = '<span class="c">' + text + (sub ? "<small>" + sub + "</small>" : "") + "</span>"; cap.classList.add("on"); }); }
-  function later(ms, f) { timers.push(setTimeout(f, ms)); }
-  function moveTo(node, ms, dx, dy) {
-    var p = pos(node), x = SX + p[0] + (dx === undefined ? node.offsetWidth / 2 : dx), y = SY + p[1] + (dy === undefined ? node.offsetHeight / 2 : dy);
-    var from = cursor.dataset.x ? [Number(cursor.dataset.x), Number(cursor.dataset.y)] : [x - 60, y + 50];
-    cursor.style.opacity = 1; cursor.style.left = "0"; cursor.style.top = "0";
-    cursor.animate([{ transform: "translate(" + from[0] + "px," + from[1] + "px)" }, { transform: "translate(" + x + "px," + y + "px)" }], { duration: ms, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" });
-    cursor.dataset.x = x; cursor.dataset.y = y;
-  }
-  function press(node) { node.classList.add("press"); later(180, function () { node.classList.remove("press"); }); }
-  // Cursor and camera work in stage coordinates; the screen is placed at (SX, SY) there, and the cursor sits in the camera.
-  cam.appendChild(cursor);
-
-  function fly(rowEl, card) {
-    var a = pos(rowEl), b = pos(card), f = el("div", "h-fly"); f.style.background = card.style.getPropertyValue("--c");
-    f.style.left = SX + a[0] + 24 + "px"; f.style.top = SY + a[1] + 1 + "px"; f.style.width = "110px"; cam.appendChild(f);
-    var dx = (b[0] - a[0]) + 20, dy = (b[1] - a[1]) + 9;
-    f.animate([{ transform: "translate(0,0)", opacity: 1 }, { transform: "translate(" + dx * 0.6 + "px," + (dy * 0.2) + "px) scale(.8)", opacity: 1, offset: 0.6 }, { transform: "translate(" + dx + "px," + dy + "px) scale(.3)", opacity: 0 }], { duration: 700, easing: "ease-in" }).finished.then(function () { f.remove(); card.classList.add("glow"); });
-  }
-
-  function finalFrame() {
-    side.classList.add("open"); grid.classList.add("narrow"); $("sb-home").hidden = true; $("sb-prev").hidden = false;
-    grid.querySelectorAll(".g-row[data-s]").forEach(function (r) { r.classList.add("tint"); });
-    $("sb-cards").querySelectorAll(".sb-em").forEach(function (c) { c.classList.add("show"); });
-    $("sb-check").classList.add("hot"); $("sb-check").querySelector("p").hidden = false;
-    setCam(1.2, SX + 336, SY + 196, 0);
-    caption("Slicemail", "One sheet. A separate email for each site. Nothing sent until you've seen it.");
-  }
-
-  function play() {
-    timers.forEach(clearTimeout); timers = []; build();
-    if (reduce) return finalFrame();
-    var rows = grid.querySelectorAll(".g-row[data-s]");
-    caption("Every Monday: one sheet, four sites.", "Which rows go to whom?");
-    later(1900, function () { setCam(1.37, SX + 336, SY + 196, 1500); });
-    later(3700, function () { caption("Open Slicemail."); moveTo($("s-ext"), 900); });
-    later(4900, function () { press($("s-ext")); side.classList.add("open"); grid.classList.add("narrow"); });
-    later(5800, function () { caption("New report starts from your data."); moveTo($("sb-new"), 900); });
-    later(6900, function () { press($("sb-new")); $("s-editor").hidden = false; });
-    later(8700, function () {
-      $("s-editor").hidden = true; $("sb-home").hidden = true; $("sb-prev").hidden = false; caption("Each site gets only its own rows.");
-      rows.forEach(function (r, i) { if (r.dataset.s !== "Lakeside") later(i * 90, function () { r.classList.add("tint"); }); });
-      Array.prototype.forEach.call($("sb-cards").children, function (c, i) { later(300 + i * 200, function () { c.classList.add("show"); }); });
-    });
-    later(10200, function () {
-      var cards = $("sb-cards").children;
-      rows.forEach(function (r, i) { if (r.dataset.s === "Lakeside") return; later(i * 170, function () { fly(r, cards[Object.keys(SITES).indexOf(r.dataset.s)]); }); });
-    });
-    later(13000, function () {
-      caption("Lakeside has sales and no recipient.", "Caught in the preview, before anything is sent.");
-      rows.forEach(function (r) { if (r.dataset.s === "Lakeside") r.classList.add("tint", "pulse"); });
-      $("sb-check").classList.add("hot"); $("sb-check").querySelector("p").hidden = false;
-    });
-    later(16800, function () { caption("And the email looks like your sheet."); $("s-mail").hidden = false; cursor.style.opacity = 0; setCam(1.5, SX + 270, SY + 120, 1200); });
-    later(20200, function () { $("s-mail").hidden = true; cursor.style.opacity = 0; setCam(0.8, 480, 270, 1800); caption("Slicemail", "One sheet. A separate email for each site."); });
-    later(25500, play);
-  }
-  fit(); new ResizeObserver(fit).observe(hero);
-  new IntersectionObserver(function (e) { if (e[0].isIntersecting && !running) { running = true; play(); } }).observe(hero);
-})();
-</script>
-<p><a href="demo.html"><strong>Try the editor on demo data</strong></a>, with no install.</p><div class="shots"><img src="assets/screenshots/01-editor.png" alt="The editor with a coloured table and the preview beside it"></div><p>You keep one report as a tab in a Google Doc: the greeting, the text, and the tables you want from your Sheet. The add-on fills in the dates, picks the recipients from rules or from a roster in your data, and gives each group only its own rows.</p>
-<p>Before anything is sent you see every email: who gets it, how many rows it carries, and the table as the recipient will see it. The preview flags what usually goes wrong, such as a site with data and no recipient, a formula error in a shown column, recipients outside your domain, an email too large for Gmail, and data that changed since you last looked. A send that no longer matches the preview is refused.</p>
-<p>What it does:</p>
-<ul><li>Sends one email per site, team, client or person, from one template.</li><li>Takes recipients from your roster tab or from the data itself.</li><li>Keeps your table formatting: fills, text colours, bold, italic, alignment.</li><li>Resolves dates such as last week, this month or the same period last year.</li><li>Includes a block editor with pickers, a live preview, and a "preview as of another day".</li><li>Offers a test send to yourself, and a run log tab in your own spreadsheet.</li></ul>
-<p>What it does not do: it has no server and collects no analytics, so the publisher never sees your data. Your data stays in your Google account, and mail goes out only when you confirm.</p>
-<p>It runs inside one spreadsheet. A report can run on a schedule (daily, weekdays, weekly or monthly, within the hour you choose): each run is built and held, you get an email, and nothing goes to your recipients until you approve it in the sidebar.</p></main>
+<main><section class="hero"><h1>Send each person only their rows.</h1><p>Slicemail turns one report in Google Sheets into a separate email for every site, team or client, each with just their part of the data. You see every email before anything is sent.</p><div class="actions"><a class="btn" href="demo.html">Try it on demo data</a><span class="soft">Runs in your browser. Nothing is sent.</span></div><div class="film"><video autoplay muted loop playsinline preload="metadata" poster="assets/demo-poster.png" aria-label="Slicemail splitting a weekly sales sheet into one email per site manager, checking it, and sending"><source src="assets/demo.webm" type="video/webm"><source src="assets/demo.mp4" type="video/mp4"></video></div></section><section class="band"><h2>One sheet in. One email per manager out.</h2><p>Here is the weekly scorecard from the demo, as Slicemail renders it: three emails from the same rows, each with its own site's numbers, totals and table, in the colours the sheet already uses.</p><div class="split"><article class="mail"><div class="mail-head"><div class="mail-to">To avery.stone@example.com</div><div class="mail-subject">Riverside weekly sales: w/c 21 Sep</div></div><div class="mail-body"><div><div>Hi Avery,</div>
+<div>Here is Riverside&#39;s week, 21-Sep-2026 - 27-Sep-2026. The figures above the table are the week&#39;s totals; vs Target is revenue minus target, so a minus means behind.</div>
+<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-family:Arial,sans-serif;margin:0 0 14px;"><tr><td style="padding:0 24px 0 0;vertical-align:top;"><div style="font-size:22px;font-weight:bold;color:#14171a;line-height:1.2;">$44,270</div><div style="font-size:12px;color:#5b626b;">Revenue</div></td><td style="padding:0 24px 0 0;vertical-align:top;"><div style="font-size:22px;font-weight:bold;color:#14171a;line-height:1.2;">$42,000</div><div style="font-size:12px;color:#5b626b;">Target</div></td><td style="padding:0 0px 0 0;vertical-align:top;"><div style="font-size:22px;font-weight:bold;color:#14171a;line-height:1.2;">+$2,270</div><div style="font-size:12px;color:#5b626b;">vs Target</div></td></tr></table>
+<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px;color:#14171a;"><thead><tr><th align="left" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:left;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Date</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Orders</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Revenue</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Avg Order</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Target</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">vs Target</th></tr></thead><tbody><tr><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Mon 21 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">139</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$5,820</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$41.87</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$5,500</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#0b7a4b;font-weight:bold;">+$320</td></tr><tr bgcolor="#f6f7f9" style="background-color:#f6f7f9;"><td align="left" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;background-color:#f3f4fb;">Tue 22 Sep</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">129</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$5,410</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$41.94</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$5,500</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;color:#b42318;font-weight:bold;">-$90</td></tr><tr><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Wed 23 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">144</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$6,050</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$42.01</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$5,500</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#0b7a4b;font-weight:bold;">+$550</td></tr><tr bgcolor="#f6f7f9" style="background-color:#f6f7f9;"><td align="left" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;background-color:#f3f4fb;">Thu 24 Sep</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">142</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$5,960</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$41.97</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$5,500</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;color:#0b7a4b;font-weight:bold;">+$460</td></tr><tr><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Fri 25 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">164</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$6,880</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$41.95</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$6,000</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#0b7a4b;font-weight:bold;">+$880</td></tr><tr bgcolor="#f6f7f9" style="background-color:#f6f7f9;"><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Sat 26 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">189</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$7,940</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$42.01</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$7,500</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#0b7a4b;font-weight:bold;">+$440</td></tr><tr><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Sun 27 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">148</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$6,210</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$41.96</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$6,500</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#b42318;font-weight:bold;">-$290</td></tr></tbody></table>
+<div><b>If you finished the week behind target, reply with one line on why by Wednesday</b> so it goes into the regional summary.</div>
+<div>Thanks,</div>
+<div>Operations</div></div></div></article><article class="mail"><div class="mail-head"><div class="mail-to">To blake.harper@example.com</div><div class="mail-subject">Harbor weekly sales: w/c 21 Sep</div></div><div class="mail-body"><div><div>Hi Blake,</div>
+<div>Here is Harbor&#39;s week, 21-Sep-2026 - 27-Sep-2026. The figures above the table are the week&#39;s totals; vs Target is revenue minus target, so a minus means behind.</div>
+<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-family:Arial,sans-serif;margin:0 0 14px;"><tr><td style="padding:0 24px 0 0;vertical-align:top;"><div style="font-size:22px;font-weight:bold;color:#14171a;line-height:1.2;">$28,480</div><div style="font-size:12px;color:#5b626b;">Revenue</div></td><td style="padding:0 24px 0 0;vertical-align:top;"><div style="font-size:22px;font-weight:bold;color:#14171a;line-height:1.2;">$31,000</div><div style="font-size:12px;color:#5b626b;">Target</div></td><td style="padding:0 0px 0 0;vertical-align:top;"><div style="font-size:22px;font-weight:bold;color:#14171a;line-height:1.2;">-$2,520</div><div style="font-size:12px;color:#5b626b;">vs Target</div></td></tr></table>
+<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px;color:#14171a;"><thead><tr><th align="left" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:left;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Date</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Orders</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Revenue</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Avg Order</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Target</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">vs Target</th></tr></thead><tbody><tr><td align="left" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;background-color:#f3f4fb;">Mon 21 Sep</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">95</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$3,620</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$38.11</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$4,000</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;color:#b42318;font-weight:bold;">-$380</td></tr><tr bgcolor="#f6f7f9" style="background-color:#f6f7f9;"><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Tue 22 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">102</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$3,880</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$38.04</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$4,000</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#b42318;font-weight:bold;">-$120</td></tr><tr><td align="left" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;background-color:#f3f4fb;">Wed 23 Sep</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">90</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$3,410</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$37.89</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$4,000</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;color:#b42318;font-weight:bold;">-$590</td></tr><tr bgcolor="#f6f7f9" style="background-color:#f6f7f9;"><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Thu 24 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">104</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$3,950</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$37.98</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$4,000</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#b42318;font-weight:bold;">-$50</td></tr><tr><td align="left" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;background-color:#f3f4fb;">Fri 25 Sep</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">108</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$4,120</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$38.15</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$4,500</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;color:#b42318;font-weight:bold;">-$380</td></tr><tr bgcolor="#f6f7f9" style="background-color:#f6f7f9;"><td align="left" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;background-color:#f3f4fb;">Sat 26 Sep</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">128</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$4,870</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$38.05</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$5,500</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;color:#b42318;font-weight:bold;">-$630</td></tr><tr><td align="left" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;background-color:#f3f4fb;">Sun 27 Sep</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">122</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$4,630</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$37.95</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$5,000</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;color:#b42318;font-weight:bold;">-$370</td></tr></tbody></table>
+<div><b>If you finished the week behind target, reply with one line on why by Wednesday</b> so it goes into the regional summary.</div>
+<div>Thanks,</div>
+<div>Operations</div></div></div></article><article class="mail"><div class="mail-head"><div class="mail-to">To finley.brooks@example.com</div><div class="mail-subject">Hilltop weekly sales: w/c 21 Sep</div></div><div class="mail-body"><div><div>Hi Finley,</div>
+<div>Here is Hilltop&#39;s week, 21-Sep-2026 - 27-Sep-2026. The figures above the table are the week&#39;s totals; vs Target is revenue minus target, so a minus means behind.</div>
+<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-family:Arial,sans-serif;margin:0 0 14px;"><tr><td style="padding:0 24px 0 0;vertical-align:top;"><div style="font-size:22px;font-weight:bold;color:#14171a;line-height:1.2;">$20,490</div><div style="font-size:12px;color:#5b626b;">Revenue</div></td><td style="padding:0 24px 0 0;vertical-align:top;"><div style="font-size:22px;font-weight:bold;color:#14171a;line-height:1.2;">$19,200</div><div style="font-size:12px;color:#5b626b;">Target</div></td><td style="padding:0 0px 0 0;vertical-align:top;"><div style="font-size:22px;font-weight:bold;color:#14171a;line-height:1.2;">+$1,290</div><div style="font-size:12px;color:#5b626b;">vs Target</div></td></tr></table>
+<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px;color:#14171a;"><thead><tr><th align="left" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:left;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Date</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Orders</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Revenue</th><th align="left" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:left;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Avg Order</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">Target</th><th align="right" bgcolor="#3a46b0" style="padding:6px 12px;border-bottom:2px solid #3b424a;color:#14171a;font-weight:bold;text-align:right;background-color:#3a46b0;color:#ffffff;font-weight:bold;">vs Target</th></tr></thead><tbody><tr><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Mon 21 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">93</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$3,240</td><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">$34.84</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$3,000</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#0b7a4b;font-weight:bold;">+$240</td></tr><tr bgcolor="#f6f7f9" style="background-color:#f6f7f9;"><td align="left" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;background-color:#f3f4fb;">Tue 22 Sep</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">88</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$3,090</td><td align="left" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;background-color:#f3f4fb;">$35.11</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$3,000</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;color:#0b7a4b;font-weight:bold;">+$90</td></tr><tr><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Wed 23 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">82</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$2,870</td><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">$35.00</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$3,000</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#b42318;font-weight:bold;">-$130</td></tr><tr bgcolor="#f6f7f9" style="background-color:#f6f7f9;"><td align="left" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;background-color:#f3f4fb;">Thu 24 Sep</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">95</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$3,310</td><td align="left" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;background-color:#f3f4fb;">$34.84</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;">$3,000</td><td align="right" bgcolor="#f3f4fb" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;background-color:#f3f4fb;color:#0b7a4b;font-weight:bold;">+$310</td></tr><tr><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Fri 25 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">102</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$3,560</td><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">$34.90</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$3,200</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#0b7a4b;font-weight:bold;">+$360</td></tr><tr bgcolor="#f6f7f9" style="background-color:#f6f7f9;"><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Sat 26 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">126</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$4,420</td><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">$35.08</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$4,000</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#0b7a4b;font-weight:bold;">+$420</td></tr><tr><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;">Sun 27 Sep</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">0</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$0</td><td align="left" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:left;color:#b42318;font-weight:bold;">#DIV/0!</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;">$0</td><td align="right" style="padding:6px 12px;border-bottom:1px solid #e3e6ea;text-align:right;color:#0b7a4b;font-weight:bold;">$0</td></tr></tbody></table>
+<div><b>If you finished the week behind target, reply with one line on why by Wednesday</b> so it goes into the regional summary.</div>
+<div>Thanks,</div>
+<div>Operations</div></div></div></article></div></section><section class="band"><h2>It tells you what would go wrong first.</h2><p>Before anything is sent, the preview lists what a careful person would catch. For the scorecard, it finds these two:</p><div class="checks"><ul><li>Lakeside's rows would go to no one. Nobody on the list manages Lakeside, so its sales would quietly drop out.</li><li>Hilltop's email would show #DIV/0! for Sunday's average order. Fix the formula in the sheet before it goes out.</li></ul></div></section><section class="band"><h2>Start from an example.</h2><p>Each one writes a demo tab into your sheet and opens a report you can change.</p><ul class="examples"><li><b>Weekly site scorecard</b><span>Each site manager: last week against target.</span></li><li><b>Overdue invoices to chase</b><span>Each owner: their late invoices, oldest first.</span></li><li><b>Training to renew</b><span>Each person: what to renew this month.</span></li></ul></section><section class="band"><h2>Your data stays in your Google account.</h2><div class="facts"><p><b>No server.</b>Slicemail runs inside Google Sheets as an add-on. Nothing passes through anyone else's computers.</p><p><b>Narrow access.</b>It reads only the spreadsheet it is open in, and opens only the one Google Doc that holds your reports.</p><p><b>Sent from your Gmail.</b>Emails go out from your own account, within your normal daily sending limit.</p><p><b>Nothing sends by itself.</b>Scheduled reports are built for you and wait for your approval.</p></div></section><section class="end"><h2>See it on your own kind of data.</h2><a class="btn" href="demo.html">Try it on demo data</a></section></main>
 <footer>Slicemail is published by [LEGAL NAME]. It is not made by or endorsed by Google. Google Sheets and Google Docs are trademarks of Google LLC.</footer>
 </body></html>
