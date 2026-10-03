@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support · Slicemail</title><link rel="icon" href="assets/icon-96.png">
+<style>
+:root{--bg:#fff;--text:#14171a;--muted:#5b626b;--line:#e3e6ea;--accent:#4a5bf0;--code:#f3f5f7}
+@media (prefers-color-scheme:dark){:root{--bg:#14171a;--text:#e8eaed;--muted:#9aa1a9;--line:#2c3238;--accent:#8f9bff;--code:#1f2429}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header,main,footer{max-width:720px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;gap:12px;padding-top:24px;padding-bottom:12px}
+header img{width:36px;height:36px;border-radius:9px}header a{color:var(--text);text-decoration:none;font-weight:600}
+nav{margin-left:auto;display:flex;gap:16px;font-size:14px}nav a{color:var(--muted);font-weight:400}
+h1{font-size:2rem;line-height:1.2;margin:1.2em 0 .4em}h2{font-size:1.25rem;margin:1.8em 0 .4em}h3{font-size:1.05rem;margin:1.4em 0 .3em}
+a{color:var(--accent)}p,li{max-width:70ch}code{background:var(--code);padding:.1em .35em;border-radius:5px;font-size:.92em}
+pre{background:var(--code);padding:12px 14px;border-radius:8px;overflow:auto}pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.94rem}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+blockquote{margin:1em 0;padding:.2em 1em;border-left:3px solid var(--line);color:var(--muted)}
+footer{padding-top:32px;padding-bottom:40px;color:var(--muted);font-size:14px}
+.lede{font-size:1.15rem;color:var(--muted)}.demo{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:24px 0}.demo iframe{display:block;width:100%;height:720px;border:0}
+.shots{display:grid;gap:16px;margin:24px 0}.shots img{max-width:100%;border:1px solid var(--line);border-radius:10px}
+</style></head><body>
+<header><img src="assets/icon-96.png" alt=""><a href="index.html">Slicemail</a>
+<nav><a href="demo.html">Demo</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></header>
+<main><h1>Support</h1>
+<p>Write to slicemail@enayatullah.com. Say which report, what you expected, and what happened. A screenshot of the sidebar or editor helps; leave out anything you do not want to share, and never send passwords. Replies come on working days, best effort.</p>
+<h2>Questions people ask first</h2>
+<p><strong>Who gets which rows?</strong> Each email contains only the rows that match its group, picked by the rules in your template. The preview lists every email, who it goes to, and how many rows it carries. If a group has rows and no recipient, or a recipient and no rows, the preview says so before anything can be sent.</p>
+<p><strong>Does it send anything on its own?</strong> No. A send happens when you press Send and confirm. It refuses to send if the data changed after the preview you looked at.</p>
+<p><strong>Where is my data?</strong> In your own Google account. The add-on has no server and the publisher cannot see your spreadsheets or your mail. The <a href="https://slicemail.enayatullah.com/privacy.html">privacy policy</a> lists what it reads, writes and stores.</p>
+<p><strong>Why did it refuse to send?</strong> The messages say. The usual reasons: the data changed since the preview, today's email quota is too low for this report, another send is running, or a check found a problem (a formula error in a shown column, an email near Gmail's size limit).</p>
+<p><strong>Why is my email cut off at the bottom in Gmail?</strong> Gmail hides everything after about 102 KB. The preview warns near that size and blocks above it. Add <code>TOP</code> to the table, or link to the Sheet instead of pasting every row.</p>
+<p><strong>It stopped partway through a large send.</strong> Apps Script stops a run at six minutes. The add-on stops itself earlier, records how many emails went out, and continues from that count when you send the same preview again.</p>
+<p><strong>Can I change the look of a table?</strong> The add-on keeps the fill, text colour, bold, italic and alignment you set in the Sheet. Cells that look like the default take the add-on's own style.</p>
+<p><strong>Does it work with Outlook recipients?</strong> Mail is HTML with inline styles, which Outlook reads. Table colours and widths are worth checking with <em>Send test to me</em> once.</p>
+<p><strong>How do I remove it?</strong> Remove it from Extensions &gt; Add-ons &gt; Manage add-ons, and revoke access at &lt;https://myaccount.google.com/permissions&gt;. Delete the "Slicemail Log" tab and any demo tabs if you do not want them.</p>
+<h2>Known limits</h2>
+<ul><li>It works inside one spreadsheet. A table from another spreadsheet is refused with a message saying so.</li><li>It sends through Apps Script's mail service, so your account's daily recipient quota applies.</li><li>Scheduled reports run within the hour you choose, not at an exact minute, and each one waits for your approval before it sends.</li><li>Editor add-ons are not available in the mobile Sheets app.</li></ul></main>
+<footer>Slicemail is published by [LEGAL NAME]. It is not made by or endorsed by Google. Google Sheets and Google Docs are trademarks of Google LLC.</footer>
+</body></html>
