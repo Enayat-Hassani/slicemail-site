@@ -6,7 +6,8 @@
 :root{--bg:#fff;--text:#14171a;--muted:#5b626b;--line:#e3e6ea;--accent:#3a46b0;--code:#f3f5f7}
 @media (prefers-color-scheme:dark){:root{--bg:#14171a;--text:#e8eaed;--muted:#9aa1a9;--line:#2c3238;--accent:#8f9bff;--code:#1f2429}}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Schibsted Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-header,main,footer{max-width:720px;margin:0 auto;padding:0 20px}
+html{scrollbar-gutter:stable}header,main,footer{max-width:1120px;margin:0 auto;padding:0 20px}
+.narrow{max-width:760px}
 header{display:flex;align-items:center;gap:12px;padding-top:24px;padding-bottom:12px}
 header img{width:36px;height:36px;border-radius:9px}header a{color:var(--text);text-decoration:none;font-weight:600}
 nav{margin-left:auto;display:flex;gap:16px;font-size:14px}nav a{color:var(--muted);font-weight:400}
@@ -15,14 +16,14 @@ a{color:var(--accent)}p,li{max-width:70ch}code{background:var(--code);padding:.1
 pre{background:var(--code);padding:12px 14px;border-radius:8px;overflow:auto}pre code{background:none;padding:0}
 table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.94rem}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 blockquote{margin:1em 0;padding:.2em 1em;border-left:3px solid var(--line);color:var(--muted)}
-@media (max-width:480px){nav{gap:10px;font-size:13px}header{gap:8px}}
+header{flex-wrap:wrap}@media (max-width:560px){nav{margin-left:0;width:100%;gap:18px}header{gap:8px}}
 footer{padding-top:32px;padding-bottom:40px;color:var(--muted);font-size:14px}
 .lede{font-size:1.15rem;color:var(--muted)}.demo{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:24px 0}.demo iframe{display:block;width:100%;height:720px;border:0}
 .shots{display:grid;gap:16px;margin:24px 0}.shots img{max-width:100%;border:1px solid var(--line);border-radius:10px}
 </style></head><body>
 <header><img src="assets/icon-96.png" alt=""><a href="index.html">Slicemail</a>
 <nav><a href="demo.html">Demo</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></header>
-<main><h1 id="support">Support</h1>
+<main><div class="narrow"><h1 id="support">Support</h1>
 <p>Write to slicemail@enayatullah.com. Say which report, what you expected, and what happened. A screenshot of the sidebar or editor helps; leave out anything you do not want to share, and never send passwords. Replies come on working days, best effort.</p>
 <h2 id="questions-people-ask-first">Questions people ask first</h2>
 <p><strong>Who gets which rows?</strong> Each email contains only the rows that match its group, picked by the rules in your template. The preview lists every email, who it goes to, and how many rows it carries. If a group has rows and no recipient, or a recipient and no rows, the preview says so before anything can be sent.</p>
@@ -51,6 +52,6 @@ TOTAL: Orders, Revenue
 <table><thead><tr><th>Write</th><th>You get</th></tr></thead><tbody><tr><td><code>{{Site}}</code></td><td>The person's value in that column of the people list. It also splits the report into one email per value</td></tr><tr><td><code>{{DATE:Today-1}}</code></td><td>Yesterday, in the report's date format</td></tr><tr><td><code>{{RANGE:Week-1}}</code></td><td>Last week, first day to last</td></tr><tr><td><code>{{DATE_FORMAT:Week-1 Start:d MMM}}</code></td><td>A date in your own pattern</td></tr><tr><td><code>{{GREETING}}</code></td><td>Good morning, afternoon or evening</td></tr><tr><td><code>$LINK:https://example.com, TEXT:the tracker$</code></td><td>A link</td></tr></tbody></table>
 <p><strong>Dates</strong> are a unit, an offset and an optional part: <code>Today-7</code>, <code>Month-1 Start</code>, <code>Week Fri</code>, <code>Quarter+1 End</code>. A range is <code>A to B</code>, like <code>Today-7 to Today-1</code>.</p>
 <h2 id="known-limits">Known limits</h2>
-<ul><li>It works inside one spreadsheet. A table from another spreadsheet is refused with a message saying so.</li><li>It sends through Apps Script's mail service, so your account's daily recipient quota applies.</li><li>Scheduled reports run within the hour you choose, not at an exact minute, and each one waits for your approval before it sends.</li><li>Editor add-ons are not available in the mobile Sheets app.</li></ul></main>
+<ul><li>It works inside one spreadsheet. A table from another spreadsheet is refused with a message saying so.</li><li>It sends through Apps Script's mail service, so your account's daily recipient quota applies.</li><li>Scheduled reports run within the hour you choose, not at an exact minute, and each one waits for your approval before it sends.</li><li>Editor add-ons are not available in the mobile Sheets app.</li></ul></div></main>
 <footer>Slicemail is published by [LEGAL NAME]. It is not made by or endorsed by Google. Google Sheets and Google Docs are trademarks of Google LLC.</footer>
 </body></html>

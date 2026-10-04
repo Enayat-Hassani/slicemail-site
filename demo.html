@@ -6,7 +6,8 @@
 :root{--bg:#fff;--text:#14171a;--muted:#5b626b;--line:#e3e6ea;--accent:#3a46b0;--code:#f3f5f7}
 @media (prefers-color-scheme:dark){:root{--bg:#14171a;--text:#e8eaed;--muted:#9aa1a9;--line:#2c3238;--accent:#8f9bff;--code:#1f2429}}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Schibsted Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-header,main,footer{max-width:1040px;margin:0 auto;padding:0 20px}
+html{scrollbar-gutter:stable}header,main,footer{max-width:1120px;margin:0 auto;padding:0 20px}
+.narrow{max-width:1040px}
 header{display:flex;align-items:center;gap:12px;padding-top:24px;padding-bottom:12px}
 header img{width:36px;height:36px;border-radius:9px}header a{color:var(--text);text-decoration:none;font-weight:600}
 nav{margin-left:auto;display:flex;gap:16px;font-size:14px}nav a{color:var(--muted);font-weight:400}
@@ -15,13 +16,13 @@ a{color:var(--accent)}p,li{max-width:70ch}code{background:var(--code);padding:.1
 pre{background:var(--code);padding:12px 14px;border-radius:8px;overflow:auto}pre code{background:none;padding:0}
 table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.94rem}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 blockquote{margin:1em 0;padding:.2em 1em;border-left:3px solid var(--line);color:var(--muted)}
-@media (max-width:480px){nav{gap:10px;font-size:13px}header{gap:8px}}
+header{flex-wrap:wrap}@media (max-width:560px){nav{margin-left:0;width:100%;gap:18px}header{gap:8px}}
 footer{padding-top:32px;padding-bottom:40px;color:var(--muted);font-size:14px}
 .lede{font-size:1.15rem;color:var(--muted)}.demo{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:24px 0}.demo iframe{display:block;width:100%;height:720px;border:0}
 .shots{display:grid;gap:16px;margin:24px 0}.shots img{max-width:100%;border:1px solid var(--line);border-radius:10px}
 </style></head><body>
 <header><img src="assets/icon-96.png" alt=""><a href="index.html">Slicemail</a>
 <nav><a href="demo.html">Demo</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></header>
-<main><h1>Try the editor</h1><p class="lede">This is the real editor and engine, running the weekly site scorecard on sample data in your browser. Nothing is sent and nothing is stored on a server. Step through each manager's email with the arrows in the preview, then change the subject or the date range and watch every email follow.</p><div class="demo"><iframe src="demo-editor.html?starter=site-scorecard" title="Editor demo"></iframe></div></main>
+<main><div class="narrow"><h1>Try the editor</h1><p class="lede">This is the real editor and engine, running the weekly site scorecard on sample data in your browser. Nothing is sent and nothing is stored on a server. Step through each manager's email with the arrows in the preview, then change the subject or the date range and watch every email follow.</p><div class="demo"><iframe src="demo-editor.html?starter=site-scorecard" title="Editor demo"></iframe></div></div></main>
 <footer>Slicemail is published by [LEGAL NAME]. It is not made by or endorsed by Google. Google Sheets and Google Docs are trademarks of Google LLC.</footer>
 </body></html>
