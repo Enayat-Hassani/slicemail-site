@@ -330,24 +330,24 @@
     d.setUTCFullYear(year, month, 0);
     return d.getUTCDate();
   }
-  function toUtc(date) {
+  function toUtc(date2) {
     const d = /* @__PURE__ */ new Date(0);
-    d.setUTCFullYear(date.year, date.month - 1, date.day);
+    d.setUTCFullYear(date2.year, date2.month - 1, date2.day);
     return d;
   }
   function fromUtc(d) {
     return { year: d.getUTCFullYear(), month: d.getUTCMonth() + 1, day: d.getUTCDate() };
   }
-  function addDays(date, days) {
-    const d = toUtc(date);
+  function addDays(date2, days) {
+    const d = toUtc(date2);
     d.setUTCDate(d.getUTCDate() + days);
     return fromUtc(d);
   }
-  function addMonths(date, months) {
-    const index = date.year * 12 + (date.month - 1) + months;
+  function addMonths(date2, months) {
+    const index = date2.year * 12 + (date2.month - 1) + months;
     const year = Math.floor(index / 12);
     const month = index - year * 12 + 1;
-    return { year, month, day: Math.min(date.day, daysInMonth(year, month)) };
+    return { year, month, day: Math.min(date2.day, daysInMonth(year, month)) };
   }
   function compareDates(a, b) {
     return a.year - b.year || a.month - b.month || a.day - b.day;
@@ -407,11 +407,11 @@
     const iso = ISO_RE.exec(head);
     if (iso) {
       if (i !== tokens.length) fail();
-      const date = { year: Number(iso[1]), month: Number(iso[2]), day: Number(iso[3]) };
-      if (date.month < 1 || date.month > 12 || date.day < 1 || date.day > daysInMonth(date.year, date.month)) {
+      const date2 = { year: Number(iso[1]), month: Number(iso[2]), day: Number(iso[3]) };
+      if (date2.month < 1 || date2.month > 12 || date2.day < 1 || date2.day > daysInMonth(date2.year, date2.month)) {
         throw new RuleError(`\u201C${original}\u201D is not a real date.`);
       }
-      return { kind: "iso", date };
+      return { kind: "iso", date: date2 };
     }
     if (OLD_WORDS.includes(head)) throw new RuleError(oldFormHint(original));
     if (head === "today") {
@@ -923,10 +923,10 @@
 
   // src/core/demo/demo-data.ts
   function noonUtc(d) {
-    const date = /* @__PURE__ */ new Date(0);
-    date.setUTCFullYear(d.year, d.month - 1, d.day);
-    date.setUTCHours(12, 0, 0, 0);
-    return date;
+    const date2 = /* @__PURE__ */ new Date(0);
+    date2.setUTCFullYear(d.year, d.month - 1, d.day);
+    date2.setUTCHours(12, 0, 0, 0);
+    return date2;
   }
   var SITES = ["Riverside", "Harbor", "Hilltop", "Lakeside"];
   var TEAMS = ["Team A", "Team B", "Team C", "Team D"];
@@ -960,21 +960,21 @@
         noonUtc(addMonths(today2, -months))
       ])
     };
-    const sales2 = {
+    const sales3 = {
       headers: ["Date", "Site", "Team", "Orders", "Revenue", "Conversion", "Manager Email"],
       rows: []
     };
     for (let day2 = 0; day2 < 14; day2++) {
-      const date = noonUtc(addDays(today2, day2 - 14));
+      const date2 = noonUtc(addDays(today2, day2 - 14));
       SITES.forEach((site, s) => {
         if (site === "Lakeside" && day2 < 14 - LAKESIDE_DAYS) return;
         const orders = 40 + (day2 * 7 + s * 13) % 25 + s * 10;
         const revenue = orders * (20 + s * 5);
         const conversion = Math.round((0.08 + (day2 * 3 + s * 5) % 9 * 0.01) * 1e3) / 1e3;
-        sales2.rows.push([date, site, TEAMS[s], orders, revenue, conversion, MANAGER_EMAIL[s]]);
+        sales3.rows.push([date2, site, TEAMS[s], orders, revenue, conversion, MANAGER_EMAIL[s]]);
       });
     }
-    return { roster: roster2, sales: sales2 };
+    return { roster: roster2, sales: sales3 };
   }
 
   // src/core/template/html.ts
@@ -1129,9 +1129,9 @@
     names.push(current);
     return names.map((c) => c.trim().replace(/^"(.*)"$/, "$1").trim()).filter(Boolean);
   }
-  function parseTableBlock(lines3) {
+  function parseTableBlock(lines4) {
     const seen = /* @__PURE__ */ new Map();
-    for (const raw of lines3) {
+    for (const raw of lines4) {
       const line = straighten(raw.trim());
       if (!line) continue;
       const m = CLAUSE_RE.exec(line);
@@ -1193,8 +1193,8 @@
       if (OPEN_ALONE.test(text2)) {
         const end = body.findIndex((p, j) => j > i && CLOSE_ALONE.test(p.text.trim()));
         if (end === -1) throw new TemplateError("A [Table] is opened but never closed. Put [/Table] on the line after its last clause.");
-        const lines3 = body.slice(i + 1, end).map((p) => p.text);
-        blocks.push({ kind: "table", directive: parseTableBlock(lines3), source: ["[Table]", ...lines3.map((l) => l.trim()), "[/Table]"].join(" ") });
+        const lines4 = body.slice(i + 1, end).map((p) => p.text);
+        blocks.push({ kind: "table", directive: parseTableBlock(lines4), source: ["[Table]", ...lines4.map((l) => l.trim()), "[/Table]"].join(" ") });
         i = end;
         continue;
       }
@@ -1394,34 +1394,34 @@
   ];
   var WEEKDAYS2 = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   var pad2 = (n) => String(n).padStart(2, "0");
-  function weekdayIndex2(date) {
+  function weekdayIndex2(date2) {
     const d = /* @__PURE__ */ new Date(0);
-    d.setUTCFullYear(date.year, date.month - 1, date.day);
+    d.setUTCFullYear(date2.year, date2.month - 1, date2.day);
     return d.getUTCDay();
   }
-  function formatDate(date, pattern) {
+  function formatDate(date2, pattern) {
     return pattern.replace(/d+|M+|y+|E+/g, (run) => {
       switch (run) {
         case "d":
-          return String(date.day);
+          return String(date2.day);
         case "dd":
-          return pad2(date.day);
+          return pad2(date2.day);
         case "M":
-          return String(date.month);
+          return String(date2.month);
         case "MM":
-          return pad2(date.month);
+          return pad2(date2.month);
         case "MMM":
-          return MONTHS[date.month - 1].slice(0, 3);
+          return MONTHS[date2.month - 1].slice(0, 3);
         case "MMMM":
-          return MONTHS[date.month - 1];
+          return MONTHS[date2.month - 1];
         case "yy":
-          return pad2(date.year % 100);
+          return pad2(date2.year % 100);
         case "yyyy":
-          return String(date.year).padStart(4, "0");
+          return String(date2.year).padStart(4, "0");
         case "EEE":
-          return WEEKDAYS2[weekdayIndex2(date)].slice(0, 3);
+          return WEEKDAYS2[weekdayIndex2(date2)].slice(0, 3);
         case "EEEE":
-          return WEEKDAYS2[weekdayIndex2(date)];
+          return WEEKDAYS2[weekdayIndex2(date2)];
         default:
           return run;
       }
@@ -1848,9 +1848,9 @@
   // src/core/preview/preview.ts
   var MAX_PER_EMAIL = 50;
   var MAX_ROWS_LISTED = 10;
-  function rowList(rowNumbers) {
-    const shown = rowNumbers.slice(0, MAX_ROWS_LISTED).join(", ");
-    const more = rowNumbers.length - MAX_ROWS_LISTED;
+  function rowList(rowNumbers2) {
+    const shown = rowNumbers2.slice(0, MAX_ROWS_LISTED).join(", ");
+    const more = rowNumbers2.length - MAX_ROWS_LISTED;
     return more > 0 ? `${shown} and ${more} more` : shown;
   }
   function startRow(range) {
@@ -1990,6 +1990,118 @@
     };
   }
 
+  // src/core/preview/describe.ts
+  function tabName(range) {
+    const m = /^'((?:[^']|'')*)'!|^([^!]+)!/.exec(range);
+    return m ? (m[1] ?? m[2]).replace(/''/g, "'") : range;
+  }
+  function rowNumbers(list) {
+    return list.replace(/ and \d+ more$/, "").split(/,\s*/).map(Number).filter((n) => Number.isInteger(n) && n > 0);
+  }
+  var rowsWord = (list) => /[, ]/.test(list.trim()) ? `Rows ${list}` : `Row ${list}`;
+  var READERS = [
+    // The note a prepared run gets when the sheet changed after it was built.
+    (t) => {
+      const m = /^This report changed since it was (?:held|prepared) at (.+?), so approving it would be refused\./.exec(t);
+      return m ? { title: "The sheet changed since this was prepared", detail: `It was prepared at ${m[1]}. Sending that version would be refused; Refresh builds it from the sheet as it is now.`, first: true } : void 0;
+    },
+    // Table 'Sales'!A1:F: 3 rows with Site = Lakeside go to no one, as nobody picked by [TO] has Site = Lakeside.
+    (t) => {
+      const m = /^Table (.+?): (\d+) rows? with (.+?) = (.+?) goe?s? to no one, as nobody picked by \[TO\] has (.+?) = .+\.$/.exec(t);
+      if (!m) return void 0;
+      const [, range, n, column, value, toColumn] = m;
+      return {
+        title: `${n} ${value} row${n === "1" ? "" : "s"} go${n === "1" ? "es" : ""} to no one`,
+        detail: `No recipient has ${toColumn} = ${value}. Add their address to the sheet, or leave these rows out on purpose.`,
+        target: { kind: "rows", range, column, value },
+        first: true
+      };
+    },
+    // Table 'Sales'!A1:I: Avg Order shows #DIV/0! in row 24. Fix the formula before sending.
+    (t) => {
+      const m = /^Table (.+?): (.+?) shows (.+?) in rows? ([\d, ]+(?: and \d+ more)?)\. Fix the formula before sending\.$/.exec(t);
+      if (!m) return void 0;
+      const [, range, column, errors, list] = m;
+      return {
+        title: `${errors} in ${column}`,
+        detail: `${rowsWord(list)} of ${tabName(range)}. Fix the formula in the sheet before sending.`,
+        target: { kind: "cells", range, rows: rowNumbers(list), column }
+      };
+    },
+    (t) => {
+      const m = /^Table (.+?): (.+?) was still calculating \(Loading\.\.\.\) in rows? (.+?)\. /.exec(t);
+      if (!m) return void 0;
+      return { title: `${m[2]} was still calculating`, detail: `${rowsWord(m[3])} of ${tabName(m[1])}. Refresh once the sheet has finished.`, target: { kind: "cells", range: m[1], rows: rowNumbers(m[3]), column: m[2] } };
+    },
+    // Table 'Invoices'!A1:H: row 11 left out because Due is blank.
+    (t) => {
+      const m = /^Table (.+?): rows? (.+?) left out because (.+?) (is blank|could not be compared)\.$/.exec(t);
+      if (!m) return void 0;
+      const [, range, list, column, why] = m;
+      const n = rowNumbers(list).length;
+      return {
+        title: `${n === 1 ? "A row is" : `${n} rows are`} left out: ${column} ${why === "is blank" ? "is blank" : "is not a value it can compare"}`,
+        detail: `${rowsWord(list)} of ${tabName(range)}. Fill it in to include ${n === 1 ? "it" : "them"}.`,
+        target: { kind: "cells", range, rows: rowNumbers(list), column }
+      };
+    },
+    // To: roster row 13 left out because its email is not valid.
+    (t) => {
+      const m = /^(To|CC): roster rows? (.+?) left out because (its email is not valid|.+? is blank, so they belong to no email)\.$/.exec(t);
+      if (!m) return void 0;
+      const n = rowNumbers(m[2]).length;
+      const invalid = m[3] === "its email is not valid";
+      return {
+        title: invalid ? `${n === 1 ? "An email address isn't" : `${n} email addresses aren't`} valid` : `${n === 1 ? "A person has" : `${n} people have`} no ${m[3].replace(/ is blank, so they belong to no email$/, "")}`,
+        detail: `${rowsWord(m[2])} of the people list. ${n === 1 ? "That person gets" : "They get"} no email.`
+      };
+    },
+    // "Supervisor" matched no one in the roster.
+    (t) => {
+      const m = /^"(.*)" matched no one in the roster\.$/.exec(t);
+      return m ? { title: `"${m[1]}" matches no one`, detail: "Nobody in the people list fits this part of To or CC." } : void 0;
+    },
+    // 2 recipients are outside example.com: a@x.com, b@y.com. These emails carry data from this spreadsheet.
+    (t) => {
+      const m = /^(\d+) recipients? (?:is|are) outside (.+?): (.+?)\. These emails carry data from this spreadsheet\.$/.exec(t);
+      if (!m) return void 0;
+      return { title: `${m[1] === "1" ? "1 recipient is" : `${m[1]} recipients are`} outside ${m[2]}`, detail: `${m[3]}. Check they should get this data.` };
+    },
+    // The email is 96 KB, near the 102 KB at which Gmail cuts emails off. <fix>
+    (t) => {
+      const m = /^The email is (.+?), near the 102 KB at which Gmail cuts emails off\. (.*)$/.exec(t);
+      return m ? { title: "Gmail may cut this email short", detail: `It is ${m[1]}; Gmail hides what comes after about 102 KB. ${m[2]}` } : void 0;
+    },
+    // Table 'Sales'!A1:F: Notes is blank in 2 of 7 rows sent.
+    (t) => {
+      const m = /^Table (.+?): (.+?) is blank in (?:(\d+) of (\d+) rows sent|every row sent)\./.exec(t);
+      if (!m) return void 0;
+      return {
+        title: m[3] ? `${m[2]} is blank in ${m[3]} of ${m[4]} rows` : `${m[2]} is blank in every row`,
+        detail: m[3] ? `Those cells are empty in the email.` : `Check the column has data, or leave it out of the table.`
+      };
+    },
+    (t) => {
+      const m = /^Table (.+?): (\d+) columns will be hard to read on a phone\. /.exec(t);
+      return m ? { title: `${m[2]} columns are hard to read on a phone`, detail: `Show fewer columns of ${tabName(m[1])} in the table.` } : void 0;
+    }
+  ];
+  function describeOne(text2) {
+    for (const read of READERS) {
+      const check = read(text2);
+      if (check) return check;
+    }
+    return { title: text2 };
+  }
+  function describeChecks(warnings, labels) {
+    const checks = warnings.map((w) => {
+      const label = labels.length > 1 ? labels.find((l) => w.startsWith(l + ": ")) : void 0;
+      const check = describeOne(label ? w.slice(label.length + 2) : w);
+      return label ? { ...check, email: label } : check;
+    });
+    return [...checks.filter((c) => c.first), ...checks.filter((c) => !c.first)];
+  }
+
   // src/core/preview/snapshot.ts
   function encodeStyles(grid) {
     const styles = { palette: [], cells: {} };
@@ -2109,7 +2221,7 @@
     ["Kai Bennett", "kai.bennett.example.com", "First aid", 8, null, "blake.harper@example.com"]
     // invalid address
   ];
-  var before = (value, date) => value instanceof Date && value.getTime() < date.getTime();
+  var before = (value, date2) => value instanceof Date && value.getTime() < date2.getTime();
   var STARTERS = [
     {
       id: "site-scorecard",
@@ -2288,19 +2400,124 @@
   function starterSheet(id, today2) {
     const starter = STARTERS.find((s) => s.id === id);
     if (!starter) throw new Error(`No starter "${id}".`);
-    const table = starter.table(today2);
-    const look = demoLook(table, (header, value) => starter.mark(header, value, today2));
+    return { starter, name: starter.tab, ...tabSheet(starter.table(today2), starter.formats, (header, value) => starter.mark(header, value, today2)) };
+  }
+  function tabSheet(table, formats, mark) {
+    const look = demoLook(table, mark);
     const styles = look.backgrounds.map(
       (row, r) => row.map((background, c) => cellStyle({ background, fontColor: look.fontColors[r][c], fontWeight: look.fontWeights[r][c], fontStyle: "normal", alignment: "general" }))
     );
-    const display = table.rows.map((row) => row.map((c, i) => formatCell(c, starter.formats[table.headers[i]])));
-    return { starter, name: starter.tab, sheet: { headers: table.headers, rows: table.rows, display, headerStyles: styles[0], styles: styles.slice(1) }, styles };
+    const display = table.rows.map((row) => row.map((c, i) => formatCell(c, formats[table.headers[i]])));
+    return { sheet: { headers: table.headers, rows: table.rows, display, headerStyles: styles[0], styles: styles.slice(1) }, styles };
   }
+
+  // dev/monthly-demo.ts
+  var TODAY = { year: 2026, month: 10, day: 1 };
+  var SALES_TAB = "Monthly Sales";
+  var PEOPLE_TAB = "Headcount";
+  var RULE = ["Department = Sales", "Join Date <= Today-90"];
+  var date = (iso) => noonUtc({ year: +iso.slice(0, 4), month: +iso.slice(5, 7), day: +iso.slice(8, 10) });
+  var WEEKS = ["2026-09-01", "2026-09-08", "2026-09-15", "2026-09-22", "2026-09-29"];
+  var SALES = [
+    ["Riverside", 42, [41200, 39800, 44100, 43600, 18900], [4e4, 4e4, 42e3, 42e3, 18e3]],
+    ["Harbor", 38, [27400, 28900, 26100, 25300, 11800], [28e3, 28e3, 29e3, 29e3, 12500]],
+    ["Hilltop", 35, [22800, 23900, 24600, 25800, 11200], [22e3, 22e3, 23e3, 23e3, 1e4]],
+    ["Lakeside", 40, [0, 0, 0, 9400, 6100], [0, 0, 0, 1e4, 6e3]]
+  ];
+  var salesTable = () => {
+    const rows = [];
+    WEEKS.forEach((week, w) => {
+      for (const [site, average, revenue, target] of SALES) {
+        if (!target[w]) continue;
+        rows.push([date(week), site, Math.round(revenue[w] / average), revenue[w], target[w], revenue[w] - target[w]]);
+      }
+    });
+    return { headers: ["Week", "Site", "Orders", "Revenue", "Target", "vs Target"], rows };
+  };
+  var PEOPLE2 = [
+    ["Avery Stone", "avery.stone@example.com", "Sales", "Riverside", "2021-03-15"],
+    ["Casey Morgan", "casey.morgan@example.com", "Sales", "Riverside", "2023-06-01"],
+    ["Devon Reed", "devon.reed@example.com", "Operations", "Riverside", "2022-09-12"],
+    ["Indigo Shaw", "indigo.shaw@example.com", "Sales", "Riverside", "2026-09-07"],
+    ["Blake Harper", "blake.harper@example.com", "Sales", "Harbor", "2020-11-02"],
+    ["Emery Cole", "emery.cole@example.com", "Sales", "Harbor", "2026-08-17"],
+    ["Harper Quinn", "harper.quinn@example.com", "Finance", "Harbor", "2024-02-05"],
+    ["Lane Foster", "lane.foster@example.com", "Operations", "Harbor", "2024-12-02"],
+    ["Finley Brooks", "finley.brooks@example.com", "Sales", "Hilltop", "2022-01-10"],
+    ["Jules Warren", "jules.warren@example.com", "Sales", "Hilltop", "2025-04-22"],
+    ["Gray Ellis", "gray.ellis@example.com", "Operations", "Hilltop", "2023-10-30"],
+    ["Kai Bennett", "kai.bennett@example.com", "Finance", "Riverside", "2021-07-19"]
+  ];
+  var NEW_PERSON = ["Jordan Lee", "jordan.lee@example.com", "Sales", "Lakeside", "2025-11-03"];
+  var peopleTable = (people) => ({ headers: ["Name", "Email", "Department", "Site", "Join Date"], rows: people.map(([n, e, d, s, j]) => [n, e, d, s, date(j)]) });
+  var GOOD3 = { color: "#0b7a4b", bold: true };
+  var BAD3 = { color: "#b42318", bold: true };
+  var sales = tabSheet(
+    salesTable(),
+    { Week: "d mmm", Orders: "#,##0", Revenue: "$#,##0", Target: "$#,##0", "vs Target": "+$#,##0;-$#,##0;$0" },
+    (header, value) => header === "vs Target" && typeof value === "number" ? value < 0 ? BAD3 : GOOD3 : void 0
+  );
+  var headcountOf = (people) => tabSheet(peopleTable(people), { "Join Date": "d mmm yyyy" }, () => void 0);
+  var headcount = headcountOf(PEOPLE2);
+  var headcountFixed = headcountOf([...PEOPLE2, NEW_PERSON]);
+  var lines2 = (url, edited = false) => [
+    "[ROSTER]",
+    `'${PEOPLE_TAB}'!A1:E`,
+    "[EMPTY]",
+    "Skip",
+    "[TO]",
+    RULE.join(" AND "),
+    "[CC]",
+    "ops.lead@example.com",
+    "[SUBJECT]",
+    "{{Site}} sales for {{MONTHNAME:Month-1}}",
+    "[BODY]",
+    "Hi {{Site}} team,",
+    edited ? "Here are {{Site}}'s weekly sales for {{RANGE:Month-1}}." : "Here are {{Site}}'s weekly sales",
+    "[Table]",
+    `FROM: ${url}, '${SALES_TAB}'!A1:F`,
+    "WHERE: Site = {{Site}} AND Week in Month-1",
+    "COLUMNS: Week, Orders, Revenue, Target, vs Target",
+    "TOTAL: Orders, Revenue, Target, vs Target",
+    "[/Table]",
+    "**If you finished the month behind target, reply with one line on why by the 5th.**",
+    "Thanks,",
+    "Operations"
+  ];
+  var URL = "https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz0123456789/edit";
+  function previewOf(people, edited = false) {
+    const paragraphs = lines2(URL, edited).map(plainParagraph);
+    const line = parseRosterLine(splitSections(paragraphs).roster);
+    const preview = buildPreview({
+      paragraphs,
+      roster: people,
+      ctx: { today: TODAY, timeZone: "UTC", weekStartsOn: 1, now: /* @__PURE__ */ new Date("2026-10-01T00:10:00Z"), dateFormat: "d MMM yyyy", emailColumn: chooseEmailColumn(people.headers, line.emailColumn, line.range), tagColumns: [] },
+      links: {},
+      getTable: () => sales.sheet,
+      cap: 50,
+      docWarnings: [],
+      senderDomain: "example.com"
+    });
+    return {
+      ...preview,
+      checks: describeChecks(preview.warnings, preview.emails.map((e) => e.label)),
+      renderedAt: "2026-10-01T00:10:00.000Z",
+      fingerprint: "dev",
+      quotaLeft: 98,
+      quotaNeeded: preview.emails.reduce((n, e) => n + e.to.length + e.cc.length, 0)
+    };
+  }
+  var PREVIEW = previewOf(headcount.sheet);
+  var PREVIEW_FIXED = previewOf(headcountFixed.sheet);
+  var SENT = previewOf(headcountFixed.sheet, true);
 
   // dev/ledger-mock.ts
   var ID = "1DemoSpreadsheetIdForTheLedgerMock0001";
-  var today = { year: 2026, month: 10, day: 2 };
-  var { roster, sales } = buildDemoData(today);
+  var isMonthly = new URLSearchParams(location.search).get("demo") === "monthly";
+  var headcountTab = new URLSearchParams(location.search).has("fixed") ? headcountFixed : headcount;
+  var today = isMonthly ? TODAY : { year: 2026, month: 10, day: 2 };
+  var dateFormat = isMonthly ? "d MMM yyyy" : "dd-MMM-yyyy";
+  var { roster, sales: sales2 } = buildDemoData(today);
   var pad = (n) => String(n).padStart(2, "0");
   var MONTHS3 = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   var show = (c, header) => {
@@ -2312,13 +2529,14 @@
   var sheet = (t) => ({ headers: t.headers, rows: t.rows, display: t.rows.map((r) => r.map((c, i) => show(c, t.headers[i]))) });
   var starterId = new URLSearchParams(location.search).get("starter");
   var example = starterId ? starterSheet(starterId, today) : null;
-  var TABS = example ? { [example.name]: example.sheet } : { "Demo Sales": sheet(sales), "Demo Roster": sheet(roster) };
+  var TABS = isMonthly ? { [SALES_TAB]: sales.sheet, [PEOPLE_TAB]: headcountTab.sheet } : example ? { [example.name]: example.sheet } : { "Demo Sales": sheet(sales2), "Demo Roster": sheet(roster) };
+  var STYLES = isMonthly ? { [SALES_TAB]: encodeStyles(sales.styles), [PEOPLE_TAB]: encodeStyles(headcountTab.styles) } : example ? { [example.name]: encodeStyles(example.styles) } : {};
   var tabInfo = (name) => {
     const t = TABS[name];
     const col = (test) => t.headers.filter((_, i) => t.rows.some((r) => r[i] !== null && r[i] !== "") && t.rows.every((r) => r[i] === null || r[i] === "" || test(r[i])));
     return { name, headers: t.headers, samples: t.display[0], dateColumns: col((c) => c instanceof Date), numberColumns: col((c) => typeof c === "number").filter((h) => !t.display[0][t.headers.indexOf(h)].endsWith("%")), rows: t.rows.length };
   };
-  var lines2 = example ? example.starter.lines(`https://docs.google.com/spreadsheets/d/${ID}`) : sample_from_data_default.replace(/PASTE_THIS_SPREADSHEETS_URL_HERE/g, `https://docs.google.com/spreadsheets/d/${ID}`).trimEnd().split("\n");
+  var lines3 = isMonthly ? lines2(`https://docs.google.com/spreadsheets/d/${ID}`) : example ? example.starter.lines(`https://docs.google.com/spreadsheets/d/${ID}`) : sample_from_data_default.replace(/PASTE_THIS_SPREADSHEETS_URL_HERE/g, `https://docs.google.com/spreadsheets/d/${ID}`).trimEnd().split("\n");
   var letters = (s) => [...s].reduce((n, ch) => n * 26 + ch.charCodeAt(0) - 64, 0);
   function tableFor(range) {
     const name = /^'((?:[^']|'')*)'!/.exec(range)?.[1] ?? range.split("!")[0];
@@ -2334,24 +2552,27 @@
     spreadsheetId: ID,
     readAt: (/* @__PURE__ */ new Date()).toISOString(),
     tooLarge: [],
-    tabs: Object.entries(TABS).map(([name, t]) => ({ name, values: [t.headers, ...t.rows].map((r) => r.map(encodeCell)), display: [t.headers, ...t.display], styles: encodeStyles(example && name === example.name ? example.styles : [t.headers.map(() => ({ bg: "#3a46b0", fg: "#ffffff", bold: true }))]) }))
+    tabs: Object.entries(TABS).map(([name, t]) => ({ name, values: [t.headers, ...t.rows].map((r) => r.map(encodeCell)), display: [t.headers, ...t.display], styles: STYLES[name] ?? encodeStyles([t.headers.map(() => ({ bg: "#3a46b0", fg: "#ffffff", bold: true }))]) }))
   });
   window.LEDGER_DATA = {
     tabId: isNew ? null : "t.demo",
-    title: isNew ? "New report" : example ? example.starter.title : "Weekly site sales",
+    title: isNew ? "New report" : isMonthly ? "Monthly sales by site" : example ? example.starter.title : "Weekly site sales",
     revision: "r1",
-    lines: isNew ? ["[TO]", "", "[SUBJECT]", "", "[BODY]", "{{GREETING}},", ""] : lines2,
+    lines: isNew ? ["[TO]", "", "[SUBJECT]", "", "[BODY]", "{{GREETING}},", ""] : lines3,
     spreadsheetId: ID,
     spreadsheetUrl: `https://docs.google.com/spreadsheets/d/${ID}`,
     docId: "1DocIdForTheSidebarMock000000000001",
     tabs: Object.keys(TABS).map(tabInfo),
     snapshot: snapshot(),
-    roster: example ? { rosterSheet: "", emailColumn: "", tagColumns: [] } : { rosterSheet: "Demo Roster", emailColumn: "Email", tagColumns: ["Role"] },
-    recipientColumns: isNew ? [] : (example ? example.sheet : TABS["Demo Sales"]).headers.map((name, i) => ({ name, sample: (example ? example.sheet : TABS["Demo Sales"]).display[0][i] })),
+    roster: example || isMonthly ? { rosterSheet: "", emailColumn: "", tagColumns: [] } : { rosterSheet: "Demo Roster", emailColumn: "Email", tagColumns: ["Role"] },
+    recipientColumns: isNew ? [] : (() => {
+      const people = isMonthly ? headcountTab.sheet : example ? example.sheet : TABS["Demo Sales"];
+      return people.headers.map((name, i) => ({ name, sample: people.display[0][i] }));
+    })(),
     today,
     timeZone: "UTC",
     weekStartsOn: 1,
-    dateFormat: "dd-MMM-yyyy",
+    dateFormat,
     senderDomain: "example.com"
   };
   var server = {
@@ -2365,7 +2586,7 @@
       const p = buildPreview({
         paragraphs,
         roster: people,
-        ctx: { today: on, timeZone: "UTC", weekStartsOn: 1, now: /* @__PURE__ */ new Date(), dateFormat: "dd-MMM-yyyy", emailColumn, tagColumns: line ? [] : ["Role"] },
+        ctx: { today: on, timeZone: "UTC", weekStartsOn: 1, now: /* @__PURE__ */ new Date(), dateFormat, emailColumn, tagColumns: line ? [] : ["Role"] },
         links: {},
         getTable: (_id, range) => tableFor(range),
         cap: 50,
